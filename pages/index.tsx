@@ -1,5 +1,6 @@
 import type { NextPage, GetStaticProps } from 'next'
 import Head from 'next/head'
+import Link from 'next/link'
 import Image from 'next/image'
 import imageLoader from '../imageLoader';
 import styles from '../styles/Home.module.css'
@@ -14,7 +15,12 @@ const Home: NextPage<{ characters: Character[] }> = ({ characters }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {characters.map((character) => {
-        return <div key={character.id}>{character.name}
+        return <div key={character.id}>
+          <Link href={`/characters/${character.id}`}>
+            <a>
+              <h3>{character.name}</h3>
+            </a>
+          </Link>
           <Image
             loader={imageLoader}
             unoptimized
