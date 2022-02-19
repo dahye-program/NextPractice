@@ -17,6 +17,7 @@ const Home: NextPage<{ characters: Character[] }> = ({ characters }) => {
         return <div key={character.id}>{character.name}
           <Image
             loader={imageLoader}
+            unoptimized
             src={character.image}
             alt={character.name}
             width="200px"
