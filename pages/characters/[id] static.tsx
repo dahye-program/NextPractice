@@ -1,14 +1,10 @@
-import { GetServerSideProps } from 'next';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 import imageLoader from '../../imageLoader';
 import { GetCharacterResults, Character } from '../../types';
 
 function CharacterPage({ character }: {
   character: Character
 }) {
-  const router = useRouter();
-  console.log(router.query);
   return (
     <div>
       <h1>{character.name}</h1>
@@ -36,9 +32,9 @@ export async function getStaticPaths() {
   }
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export async function getStaticProps({ params }: { params: { id: string } }) {
   const res = await fetch(
-    `https://rickandmortyapi.com/api/character/${context.query.id}`
+    `https://rickandmortyapi.com/api/character/${params.id}`
   );
   const character = await res.json();
   return {
